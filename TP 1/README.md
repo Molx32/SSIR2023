@@ -1,3 +1,11 @@
+## Authenticate once for the whole terminal session
+```
+az login
+```
+
+## Using Azure CLI basic command
+### Deploy ARM template with paramter file
+
 ## Using Azure CLI basic command
 ### Deploy ARM template with paramter file
 ```
