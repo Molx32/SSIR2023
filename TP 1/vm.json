@@ -4,7 +4,7 @@
     "parameters": {
         "vmSize": {
             "type": "string",
-            "defaultValue": "Standard_B2s",
+            "defaultValue": "standard_b2s",
             "metadata": {
                 "description": "Size of the virtual machine."
             }
@@ -22,13 +22,6 @@
             "metadata": {
                 "description": "Name of the virtual machine."
             }
-        },
-        "utcValue": {
-            "type": "string",
-            "defaultValue": "[utcNow()]",
-            "metadata": {
-                "description": "Returns the current (UTC) datetime value in the specified format. If no format is provided, the ISO 8601 (yyyyMMddTHHmmssZ) format is used"
-            }
         }
     },
 
@@ -36,16 +29,17 @@
 
 
     "variables": {
+        "uniq": "[concat(parameters('vmName'), uniqueString(resourceGroup().id) )]",
         "nicName": "[concat(parameters('vmName'), '-nic')]",
-        "publicIpName": "[concat(parameters('vmName'), concat('-pip-', uniquestring(parameters('utcValue'))))]",
+        "publicIpName": "[concat(parameters('vmName'), concat('-pip-', uniquestring(concat(resourceGroup().name, variables('uniq')))))]",
         "addressPrefix": "10.0.0.0/16",
-        "subnetName": "[concat(parameters('vmName'), concat('-subnet-', uniquestring(parameters('utcValue'))))]",
+        "subnetName": "[concat(parameters('vmName'), concat('-subnet-', uniquestring(concat(resourceGroup().name, variables('uniq')))))]",
         "subnetPrefix": "10.0.0.0/24",
-        "virtualNetworkName": "[concat(parameters('vmName'), concat('-vnet-', uniquestring(parameters('utcValue'))))]",
+        "virtualNetworkName": "[concat(parameters('vmName'), concat('-vnet-', uniquestring(concat(resourceGroup().name, variables('uniq')))))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "networkSecurityGroupName": "[concat(parameters('vmName'), concat('-nsg-', uniquestring(parameters('utcValue'))))]",
-        "adminUsername": "[concat('admin',substring(uniquestring(concat(parameters('utcValue'), parameters('vmName'))),0,8))]",
-        "adminPassword": "[concat('Adm1n!',uniquestring(concat(parameters('vmName'), parameters('utcValue'))))]"
+        "networkSecurityGroupName": "[concat(parameters('vmName'), concat('-nsg-', uniquestring(concat(resourceGroup().name, variables('uniq')))))]",
+        "adminUsername": "[concat('admin',substring(uniquestring(concat(variables('uniq'), parameters('vmName'))),0,8))]",
+        "adminPassword": "[concat('Adm1n!',uniquestring(concat(parameters('vmName'), variables('uniq'))))]"
     },
 
 
