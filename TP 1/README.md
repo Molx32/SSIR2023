@@ -4,10 +4,6 @@ az login
 ```
 
 ## Using Azure CLI basic command
-### Deploy ARM template with paramter file
-
-## Using Azure CLI basic command
-### Deploy ARM template with paramter file
 ```
 az vm create --resource-group clement-bonnet-rg --name ubuntu-vm-001 --image Ubuntu2004 --admin-username clem –admin-password mysuperpassword987!
 ```
