@@ -5,7 +5,7 @@ az login
 
 ## Using Azure CLI basic command
 ```
-az vm create --resource-group clement-bonnet-rg --name ubuntu-vm-001 --image Ubuntu2004 --admin-username clem –admin-password mysuperpassword987!
+az vm create --resource-group clement-bonnet-rg --name ubuntu-vm-001 --image Ubuntu2204 --admin-username clem –admin-password mysuperpassword987!
 ```
 
 ## Using Azure CLI and ARM templates
